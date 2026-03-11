@@ -5,7 +5,7 @@ import { PaymentSummary } from "./PaymentSummary";
 import "./checkout-header.css";
 import "./CheckoutPage.css";
 
-export function CheckoutPage({ cart }) {
+export function CheckoutPage({ cart, loadCart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
   const [paymentSummary, setPaymentSummary] = useState(null);
 
@@ -16,13 +16,12 @@ export function CheckoutPage({ cart }) {
       );
       setDeliveryOptions(response.data);
 
-      response = await axios.get("/api/payment-summary").then((response) => {
-        setPaymentSummary(response.data);
-      });
+      response = await axios.get("/api/payment-summary");
+      setPaymentSummary(response.data);
     };
 
     fetchCheckoutData();
-  }, []);
+  }, [cart]);
 
   return (
     <>
@@ -32,28 +31,21 @@ export function CheckoutPage({ cart }) {
         <div className="header-content">
           <div className="checkout-header-left-section">
             <a href="/">
-              <img className="logo" src="images/logo.png" alt="logo" />
-              <img
-                className="mobile-logo"
-                src="images/mobile-logo.png"
-                alt="mobile logo"
-              />
+              <img className="logo" src="images/logo.png" />
+              <img className="mobile-logo" src="images/mobile-logo.png" />
             </a>
           </div>
 
           <div className="checkout-header-middle-section">
             Checkout (
             <a className="return-to-home-link" href="/">
-              {cart.length} items
+              3 items
             </a>
             )
           </div>
 
           <div className="checkout-header-right-section">
-            <img
-              src="images/icons/checkout-lock-icon.png"
-              alt="secure checkout"
-            />
+            <img src="images/icons/checkout-lock-icon.png" />
           </div>
         </div>
       </div>
@@ -62,7 +54,11 @@ export function CheckoutPage({ cart }) {
         <div className="page-title">Review your order</div>
 
         <div className="checkout-grid">
-          <OrderSummary cart={cart} deliveryOptions={deliveryOptions} />
+          <OrderSummary
+            cart={cart}
+            deliveryOptions={deliveryOptions}
+            loadCart={loadCart}
+          />
 
           <PaymentSummary paymentSummary={paymentSummary} />
         </div>
