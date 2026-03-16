@@ -35,7 +35,8 @@ export function Product({ product, loadCart }) {
           data-testid="product-rating-stars-image"
           src={`images/ratings/rating-${product.rating.stars * 10}.png`}
         />
-
+        ̣,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,..........................................
+        -nnnnnnnnn
         <div className="product-rating-count link-primary">
           {product.rating.count}
         </div>
